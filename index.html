@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+</head>
+<body>
+    <h1>Game</h1>
+
+
+
+    <script>
+        let clientID = null;
+        let ws = new WebSocket("ws://localhost:9090")
+        ws.onmessage = message => {
+            //message.data
+            const response = JSON.parse(message.data);
+            //connect method
+            if(response.method === "connect"){
+                clientID = response.clientID;
+
+                console.log("Client ID has been set successfully " + clientID)
+            }
+        }
+    </script>
+</body>
+</html>
