@@ -1,3 +1,4 @@
+const { response } = require("express");
 const http = require("http");
 const app =  require("express")();
 app.get("/", (req,res) => res.sendFile(__dirname + "/index.html"));
@@ -30,7 +31,8 @@ wsServer.on("request", request => {
             const gameID= guid();
 
             games[gameID] = {
-                "id": gameID
+                "id": gameID,
+                "clients":[]
             };
 
             const payLoad = {
@@ -42,6 +44,39 @@ wsServer.on("request", request => {
             con.send(JSON.stringify(payLoad));
 
         }
+
+
+        if (result.method==="join") {
+            const clientID = result.clientID;
+            const gameID = result.gameId;
+            const game  = games[gameID];
+             
+            if(game.clients.length>=2){
+                //sorry no room
+                return;
+            }
+
+           const player= {"0":"Player1","1":"Player2"}[game.clients.length]  
+           game.clients.push({
+               "clientID": clientID,
+               "player":player
+           })
+
+           const payload={
+            "method":"join",
+            "game":game
+            }
+
+           game.clients.forEach( c => {
+               clients[c.clientID].connection.send(JSON.stringify(payload));
+           });
+
+
+
+        }
+
+
+
     });
 
     //generate a new clientID

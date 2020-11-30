@@ -11,5 +11,15 @@
   "dependencies": {
     "express": "^4.17.1",
     "websocket": "^1.0.32"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SynFunjioka/websocket-ahorcado-game.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SynFunjioka/websocket-ahorcado-game/issues"
+  },
+  "homepage": "https://github.com/SynFunjioka/websocket-ahorcado-game#readme"
 }
