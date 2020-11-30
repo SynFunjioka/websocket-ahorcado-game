@@ -51,7 +51,7 @@ wsServer.on("request", request => {
             const gameID = result.gameId;
             const game  = games[gameID];
              
-            if(game.clients.length>=2){
+            if(game.clients.length>=1){
                 //sorry no room
                 return;
             }
