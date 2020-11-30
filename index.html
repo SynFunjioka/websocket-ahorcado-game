@@ -7,12 +7,23 @@
 </head>
 <body>
     <h1>Game</h1>
-
+    <button id="btnCreate">New Game</button>
 
 
     <script>
         let clientID = null;
-        let ws = new WebSocket("ws://localhost:9090")
+        let ws = new WebSocket("ws://localhost:9090");
+        const btnCreate = document.getElementById("btnCreate");
+
+        btnCreate.addEventListener("click", e =>{
+            const payLoad={
+                "method": "create",
+                "clientID": clientID
+            }
+
+            ws.send(JSON.stringify(payLoad));
+        });
+        
         ws.onmessage = message => {
             //message.data
             const response = JSON.parse(message.data);
@@ -21,6 +32,12 @@
                 clientID = response.clientID;
 
                 console.log("Client ID has been set successfully " + clientID)
+            }
+
+            //create
+            if(response.method === "create"){
+                clientID = response.clientID;
+                console.log("Game successfully created with ID " + response.game.id);
             }
         }
     </script>
