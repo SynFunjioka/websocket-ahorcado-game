@@ -18,7 +18,7 @@
         let ws = new WebSocket("ws://localhost:9090");
         const btnCreate = document.getElementById("btnCreate");
         const btnJoin = document.getElementById("btnJoin");
-        const txtGameId = document.getElementById("btnCreate");
+        const txtGameId = document.getElementById("txtGameId");
         const divPlayers = document.getElementById("divPlayers");
         
         btnJoin.addEventListener("click",e =>{
@@ -73,7 +73,7 @@
                  game.clients.forEach(c => {
                     
                     const d = document.createElement("div");
-                    d.style.width="200";
+                    d.style.width="200px";
                     d.textContent= c.clientID;
                     divPlayers.appendChild(d);
                           
